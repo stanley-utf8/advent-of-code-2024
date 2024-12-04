@@ -7,6 +7,14 @@ fn main() -> std::io::Result<()> {
     // file struct keeps internal state, hence mut
     let path = Path::new("./inputs/day-01.txt");
 
+    let res_01: i32 = part_01(path)?;
+
+    println!("part 01 result: {}", res_01);
+
+    Ok(())
+}
+
+fn part_01(path: &Path) -> std::io::Result<i32> {
     let f = File::open(&path)?; // ? for error handling -- return early if error
 
     let reader = BufReader::new(f);
@@ -30,7 +38,6 @@ fn main() -> std::io::Result<()> {
 
         v1.push(id_int_1);
         v2.push(id_int_2);
-        //println!("{}", id_sum);
     }
 
     v1.sort();
@@ -40,18 +47,10 @@ fn main() -> std::io::Result<()> {
         let id_1: i32 = v1[i];
         let id_2: i32 = v2[i];
 
-        let diff: i32;
-
-        if id_1 > id_2 {
-            diff = id_1 - id_2;
-        } else {
-            diff = id_2 - id_1;
-        }
+        let diff: i32 = (id_1 - id_2).abs();
 
         total += diff;
     }
 
-    println!("{}", total);
-
-    Ok(())
+    Ok(total)
 }
