@@ -173,22 +173,31 @@ fn part_02_opt(path: &Path) -> Vec<String> {
                     .enumerate()
                     .find(|(_idx, pair)| !check_pair(pair[0], pair[1], direction))
                 {
+                    // edge case: problem at index 1 because direction switch from 0, but removing index 0 will fix it
                     if problem_idx == 1 {
                         let direction_without_first = nums[1] <= nums[2];
                         if check_line(&nums[1..], direction_without_first) {
                             return Some(line);
                         }
                     }
+
+                    // only remove first problem pair
                     let mut nums_without_first = nums.clone();
                     nums_without_first.remove(problem_idx);
+
+                    // recalc direction
                     let direction_first = nums_without_first[0] <= nums_without_first[1];
+
                     if check_line(&nums_without_first, direction_first) {
                         return Some(line);
                     }
 
+                    // if removing index 0 of problem pair doesn't fix, try index 1
                     let mut nums_without_second = nums.clone();
                     nums_without_second.remove(problem_idx + 1);
+
                     let direction_second = nums_without_second[0] <= nums_without_second[1];
+
                     if check_line(&nums_without_second, direction_second) {
                         return Some(line);
                     }
