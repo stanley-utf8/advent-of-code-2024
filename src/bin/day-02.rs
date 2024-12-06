@@ -8,17 +8,9 @@ use std::time::Instant;
 fn main() -> std::io::Result<()> {
     let path = Path::new("./inputs/day-02.txt");
 
-    //let res_01: i32 = part_01(path)?;
-    //
-    //println!("levels safe: {}", res_01);
-    //
-    //let res_02: u32 = part_02(path);
-    //
-    //println!("levels safe: {}", res_02);
-    //
-    //let res_02_opt: u32 = part_02_opt(path);
-    //
-    //println!("levels safe: {}", res_02_opt);
+    let res_01: i32 = part_01(path)?;
+
+    println!("levels safe: {}", res_01);
 
     let start = Instant::now();
     let correct_results = part_02(path);
@@ -42,6 +34,9 @@ fn main() -> std::io::Result<()> {
 
     println!("\nCorrect count: {}", correct_results.len());
     println!("Optimized count: {}", opt_results.len());
+
+    //Original solution time: 7.128167ms
+    //Optimized solution time: 5.388083ms
 
     Ok(())
 }
