@@ -3,6 +3,8 @@ use std::io::BufRead;
 use std::io::BufReader;
 use std::path::Path;
 
+use regex::Regex;
+
 fn main() -> std::io::Result<()> {
     let path = Path::new("./inputs/day-03.txt");
 
@@ -80,6 +82,28 @@ fn part_01(path: &Path) -> std::io::Result<i32> {
             }
         }
     }
+
+    Ok(total)
+}
+
+fn part_01_regex(path: &Path) -> std::io::Result<i32> {
+    let f = File::open(&path)?;
+
+    let reader = BufReader::new(f);
+
+    let re_rule = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
+
+    let total: i32 = reader.lines()
+        .filter_map(Result::ok)
+        .map(|line|{
+            re_rule.capture_iter(&line)
+            .filter_map(|capture_group| {
+                    let x= capture_group.parse::<
+                })
+        })
+
+
+
 
     Ok(total)
 }
